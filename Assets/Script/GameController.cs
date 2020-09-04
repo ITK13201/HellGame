@@ -2,43 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+namespace HellGame
 {
-    static GameController _controller;
+    public class GameController : MonoBehaviour
+    {
+        static GameController _controller;
 
-    /// <summary>
-    /// ゲームコントローラのインスタンスを取得する．
-    /// </summary>
-    public static GameController Instance {
-        get
+        /// <summary>
+        /// ゲームコントローラのインスタンスを取得する．
+        /// </summary>
+        public static GameController Instance
         {
-            if (_controller == null)
+            get
             {
-                var i = FindObjectOfType<GameController>();
-                if (i != null)
+                if (_controller == null)
                 {
-                    _controller = i;
-                    return i;
+                    var i = FindObjectOfType<GameController>();
+                    if (i != null)
+                    {
+                        _controller = i;
+                        return i;
+                    }
+
+                    var obj = new GameObject("Game Controller");
+                    _controller = obj.AddComponent<GameController>();
+                    DontDestroyOnLoad(obj);
                 }
 
-                var obj = new GameObject("Game Controller");
-                _controller = obj.AddComponent<GameController>();
-                DontDestroyOnLoad(obj);
+                return _controller;
             }
-
-            return _controller;
         }
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
     }
 }
