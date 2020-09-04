@@ -15,14 +15,4 @@ namespace HellGame.State
         Normal,
         Babiniku,
     }
-
-    public class PlayerNormalState : PlayerState
-    {
-        public override PlayerStateType Type => PlayerStateType.Normal;
-    }
-
-    public class PlayerBabinikuState : PlayerState
-    {
-        public override PlayerStateType Type => PlayerStateType.Babiniku;
-    }
 }
