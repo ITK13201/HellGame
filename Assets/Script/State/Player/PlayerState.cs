@@ -8,6 +8,9 @@ namespace HellGame.State
     /// </summary>
     public abstract class PlayerState : State<PlayerModel, PlayerStateType>
     {
+        public virtual void OnMove(int x, int y) {}
+
+        public virtual void OnCollide(object target) {}
     }
 
     public enum PlayerStateType

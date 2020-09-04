@@ -1,4 +1,4 @@
-﻿using System;
+﻿using UnityEngine;
 using HellGame.State;
 
 namespace HellGame.Model
@@ -7,6 +7,7 @@ namespace HellGame.Model
     {
         // ステートマシン
         StateMachine<PlayerModel, PlayerState, PlayerStateType> m_stateMachine;
+        StateMachine<PlayerModel, PlayerState, PlayerStateType> StateMachine => m_stateMachine;
 
         // 初期値など
         const int kPlayerModelInitialCoins = 10000;
@@ -17,17 +18,32 @@ namespace HellGame.Model
         int m_boost = kPlayerModelInitialBoost;
 
         // アクセサー．ここからビューに通知が送られる
-        public int Coins {
+
+        /// <summary>
+        /// 所有しているコインの数．
+        /// </summary>
+        public int Coins
+        {
             get => m_coins;
-            set {
+            set
+            {
+                Debug.Assert(value >= 0, "coins should not be negative");
+
                 m_coins = value;
                 Delegate?.PlayerModelUpdateCoins(this, m_coins);
             }
         }
 
-        public int Boost {
+        /// <summary>
+        /// ブースト．神絵師の腕を食うと増える．
+        /// </summary>
+        public int Boost
+        {
             get => m_boost;
-            set {
+            set
+            {
+                Debug.Assert(value >= 0, "boosts should not be negative");
+
                 m_boost = value;
                 Delegate?.PlayerModelUpdateBoost(this, m_boost);
             }
@@ -47,13 +63,15 @@ namespace HellGame.Model
             m_boost = kPlayerModelInitialBoost;
         }
 
-        public void Update() {
+        public void Update()
+        {
             // ステートマシンの更新
             m_stateMachine.Update();
         }
     }
 
-    public interface IPlayerModelDelegate {
+    public interface IPlayerModelDelegate
+    {
         void PlayerModelUpdateCoins(PlayerModel sender, int coins);
 
         void PlayerModelUpdateBoost(PlayerModel sender, int boost);
