@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace HellGame.State
+﻿namespace HellGame.State
 {
-    public abstract class State<_Target, _StateType>
+    public abstract class State<_Target, _StateType> : IState
     {
         protected IStateMachine<_Target, _StateType> m_stateMachine;
 
@@ -26,19 +24,36 @@ namespace HellGame.State
         /// </summary>
         public IStateMachine<_Target, _StateType> StateMachine { get; set; }
 
+        public virtual void OnEnter() { }
+
+        public virtual void OnExit() { }
+
+        public virtual void Update() { }
+
+        public virtual void OnMessage(IMessage _) { }
+    }
+
+    public interface IState {
         /// <summary>
         /// ステートに突入したときのイベント．
         /// </summary>
-        public virtual void OnEnter() { }
+        void OnEnter();
 
         /// <summary>
         /// ステートから抜けるときのイベント．
         /// </summary>
-        public virtual void OnExit() { }
+        void OnExit();
 
         /// <summary>
         /// 更新時のイベント．
         /// </summary>
-        public virtual void Update() { }
+        void Update();
+
+        /// <summary>
+        /// メッセージを処理する．
+        /// </summary>
+        void OnMessage(IMessage message);
     }
+
+    public interface IMessage {}
 }
