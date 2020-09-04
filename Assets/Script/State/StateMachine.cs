@@ -15,7 +15,7 @@ namespace HellGame.State
         _State : State<_Target, _StateType>
     {
         private _Target m_target;
-        private State<_Target, _StateType> m_state;
+        private _State m_state;
 
         public _Target Target
         {
@@ -30,16 +30,19 @@ namespace HellGame.State
             }
         }
 
+        public _State State => m_state;
+
         public void NotifyNextState<S>(S state)
             where S : State<_Target, _StateType>
         {
-            if (m_state == state || state == null)
+            var aState = state != null ? state as _State : null;
+            if (m_state == aState || aState == null)
             {
                 return;
             }
 
             m_state?.OnExit();
-            m_state = state;
+            m_state = aState;
             state.OnEnter();
         }
 
