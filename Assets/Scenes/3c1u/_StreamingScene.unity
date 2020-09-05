@@ -1134,7 +1134,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1108794584}
-  - component: {fileID: 1108794583}
   - component: {fileID: 1108794585}
   - component: {fileID: 1108794586}
   m_Layer: 0
@@ -1144,18 +1143,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1108794583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108794582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ac4bcac264514cde859e9f58b8e58d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1108794584
 Transform:
   m_ObjectHideFlags: 0
@@ -1213,6 +1200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995819836c5234c288bad78b9da55e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seekBar: {fileID: 1000577266}
+  superChatButtons:
+  - {fileID: 1103894274}
+  - {fileID: 363248804}
+  - {fileID: 688608105}
 --- !u!1 &1413187932
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,6 +1216,7 @@ GameObject:
   - component: {fileID: 1413187935}
   - component: {fileID: 1413187934}
   - component: {fileID: 1413187933}
+  - component: {fileID: 1413187936}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1296,6 +1289,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1413187936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413187932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ac4bcac264514cde859e9f58b8e58d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1575099295
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,6 +33,21 @@ namespace HellGame
             }
         }
 
+        public static GameController EnsureGame
+        {
+            get
+            {
+                var self = GameController.Instance;
+                
+                if (self.m_model == null)
+                {
+                    self.InitGame();
+                }
+
+                return self;
+            }
+        }
+
         // 時間
         float m_timeBegin = 0.0f;
         public float Now => Time.time - m_timeBegin;
