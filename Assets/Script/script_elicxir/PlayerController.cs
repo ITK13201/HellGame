@@ -10,16 +10,16 @@ public class PlayerController : MonoBehaviour
     public Sprite sp2;//普通の画像
 
 
-    public bool babiniku = true;//バ美肉状態かどうかのフラグ
+    public bool babiniku = false;//バ美肉状態かどうかのフラグ
 
-
+    public GameObject o = null;
 
 
     public GameObject grid = null;
 
     SpriteRenderer s = null;
     Transform t = null;
-
+    Enemy_Gen e = null;
 
     private float rotate;
 
@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
         rotate = grid.transform.rotation.eulerAngles.z;
         s = GetComponent<SpriteRenderer>();
         t = GetComponent<Transform>();
+
+        e= o.GetComponent<Enemy_Gen>();
     }
 
     bool right = false;
@@ -88,6 +90,24 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    //トリガーはVRゴーグルだけなのでこれでうごく
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        babiniku =true;//バ美肉になる
+
+        collision.transform.position = new Vector2(30, 30);//ゴーグルにいったん退場してもらう
+
+      
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "enemy"&&babiniku)
+        {
+            Destroy(collision.collider.gameObject);
+            e.num--;
+        }
+    }
 
 
 }

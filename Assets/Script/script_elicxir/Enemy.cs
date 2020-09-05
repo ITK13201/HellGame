@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject grid = null;
     public GameObject heart= null;
-    private SpriteRenderer heart2 = null;
+    private SpriteRenderer heart2 = null;    
 
     private float rotate;
 
@@ -36,7 +36,6 @@ public class Enemy : MonoBehaviour
         grid= GameObject.FindWithTag("terrain");
         heart2 = heart.GetComponent<SpriteRenderer>();
         p= GameObject.Find("Player").GetComponent<PlayerController>(); ;
-
         rotate = grid.transform.rotation.eulerAngles.z;
 
         maindirection = (int)Random.Range(0, 3.999f);
@@ -178,11 +177,6 @@ public class Enemy : MonoBehaviour
             yuragi = -yuragi;
 
         }
-        else if(collision.collider.tag == "Player"&&find)
-        {
-            Destroy(this.gameObject);
-        }
-
         
 
     }
