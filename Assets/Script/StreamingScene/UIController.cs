@@ -10,6 +10,7 @@ namespace HellGame.StreamingScene
     public class UIController : MonoBehaviour
     {
         GameController m_gc;
+        CommentFactory m_factory;
 
         readonly int m_viewportWidth = 777;
         // int m_viewportHeight = 439;
@@ -29,6 +30,9 @@ namespace HellGame.StreamingScene
 
             // 初期化
             OnBiasStateChanged(m, m.State.Type);
+
+            //
+            m_factory = GetComponent<CommentFactory>();
         }
 
         void OnDestroy()
