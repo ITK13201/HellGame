@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 1108794584}
   - component: {fileID: 1108794583}
   - component: {fileID: 1108794585}
+  - component: {fileID: 1108794586}
   m_Layer: 0
   m_Name: Streaming
   m_TagString: Untagged
@@ -214,7 +215,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1108794582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 111bd73a2ab0a4c839132f4e50f9e6f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ac4bcac264514cde859e9f58b8e58d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1108794584
@@ -262,6 +263,19 @@ MonoBehaviour:
   - "\u304B\u308F\u3044\u3044"
   - "\u3053\u3053\u3059\u304D"
   - "\u8349"
+--- !u!114 &1108794586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108794582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995819836c5234c288bad78b9da55e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_statusDisplay: {fileID: 1114783460}
 --- !u!1 &1114783458
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +311,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 199.39197, y: 46.66588}
+  m_SizeDelta: {x: 600, y: 46.66588}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1114783460
 MonoBehaviour:

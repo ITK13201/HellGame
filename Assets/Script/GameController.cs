@@ -40,6 +40,8 @@ namespace HellGame
         // ゲームの実体はコレ
         private GameModel m_model = null;
 
+        public GameModel Model => m_model;
+
         public bool Active => m_model != null;
 
         /// <summary>

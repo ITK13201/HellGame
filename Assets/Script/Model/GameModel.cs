@@ -14,6 +14,9 @@ namespace HellGame.Model
         /// </summary>
         private BiasModel m_bias;
 
+        public PlayerModel Player => m_player;
+        public BiasModel Bias => m_bias;
+
         public GameModel()
         {
             m_player = new PlayerModel();
