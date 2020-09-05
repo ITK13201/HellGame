@@ -32,7 +32,7 @@ namespace HellGame
                 return _controller;
             }
         }
-        
+
         // ゲームの実体はコレ
         private GameModel m_model = null;
 
@@ -41,7 +41,8 @@ namespace HellGame
         /// </summary>
         public void InitGame()
         {
-            if (m_model != null) {
+            if (m_model != null)
+            {
                 Debug.LogWarning("");
                 return;
             }
@@ -53,6 +54,12 @@ namespace HellGame
         public void EndGame()
         {
             m_model = null;
+        }
+
+        // Start is called before the first frame update
+        void Start()
+        {
+
         }
 
         // Update is called once per frame
