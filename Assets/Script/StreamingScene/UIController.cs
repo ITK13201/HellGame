@@ -9,10 +9,7 @@ namespace HellGame.StreamingScene
     public class UIController : MonoBehaviour
     {
         GameController m_gameController;
-
-        [SerializeField]
-        Text m_statusDisplay;
-
+        
         // int m_viewportWidth = 777;
         // int m_viewportHeight = 439;
 
@@ -36,21 +33,6 @@ namespace HellGame.StreamingScene
 
         void DisplayStatus()
         {
-            switch (m_gameController.Model.Bias.StateMachine.State)
-            {
-                case BiasStreamingState s:
-                    m_statusDisplay.text = $"配信中（合計{s.StreamingDuration}秒）: のこり{s.RemainingTime}秒";
-                    break;
-                case BiasInactiveState _:
-                    m_statusDisplay.text = "オフライン";
-                    break;
-                case BiasPreparingState s:
-                    m_statusDisplay.text = $"準備中：配信まで{s.TimeToReady}秒";
-                    break;
-                default:
-                    throw new NotImplementedException("unreachable pattern!");
-                    // break;
-            }
         }
 
         void OnBiasStateChanged(IStateMachine<BiasModel, BiasStateType> sender_, BiasStateType type)
