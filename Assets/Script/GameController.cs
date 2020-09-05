@@ -44,10 +44,33 @@ namespace HellGame
 
         public bool Active => m_model != null;
 
+        private void Awake()
+        {
+            if (_controller == null)
+            {
+                _controller = this;
+                DontDestroyOnLoad(this.gameObject);
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
+        }
+
         /// <summary>
         /// ゲームの初期化を行う
         /// </summary>
+        /// 
+
+        private void Start()
+        {
+            InitGame();
+
+        }
+
         public void InitGame()
+
+
         {
             if (m_model != null)
             {

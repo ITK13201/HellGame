@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
 
     int yuragi=0;
 
-    float speed=6.0f;
+    float speed=3.0f;
     float yuragidelta = 0.78f;
 
     float yuragitimer;
@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour
         find =false;
         for (int i = -70; i <= 70; i++)
         {
-            d3 = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate + maindirection * 90 + yuragi + 2 * i) * 3.1415f / 180.0f), Mathf.Sin((rotate + maindirection * 90 + yuragi + 2 * i) * 3.1415f / 180.0f)), 18.0f, 256 + 512);
+            d3 = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate + maindirection * 90 + yuragi + 2 * i) * 3.1415f / 180.0f), Mathf.Sin((rotate + maindirection * 90 + yuragi + 2 * i) * 3.1415f / 180.0f)), 9.0f, 256 + 512);
             if (d3.collider)
             {
                 if (d3.collider.gameObject.name == "Player")
@@ -72,19 +72,24 @@ public class Enemy : MonoBehaviour
                     go_ahead = rotate + maindirection * 90 + yuragi + 2 * i;
                         find = true;
                 }
+                else if(d3.collider.gameObject.name == "GOD")
+                {
+                    go_ahead = rotate + maindirection * 90 + yuragi + 2 * i;
+                    find = true;
+                }
             }
         }
 
 
         if (find)
         {
-            speed = 15.0f;
+            speed = 6.0f;
             heart2.enabled = true;
 
 
         }else
         {
-            speed = 6.0f;
+            speed = 3.0f;
             heart2.enabled = false;
         }
 
@@ -106,16 +111,16 @@ public class Enemy : MonoBehaviour
          }
 
 
-        d1[0] = Physics2D.Raycast(new Vector2(this.transform.position.x+cl.offset.x, this.transform.position.y + cl.offset.y),new Vector2(Mathf.Cos(rotate * 3.1415f / 180.0f), Mathf.Sin(rotate * 3.1415f / 180.0f)), 1.1f,256);
-        d1[1] = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate+90) * 3.1415f / 180.0f), Mathf.Sin((rotate+90) * 3.1415f / 180.0f)), 1.1f, 256);
-        d1[2] = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate + 180) * 3.1415f / 180.0f), Mathf.Sin((rotate + 180) * 3.1415f / 180.0f)), 1.1f, 256);
-        d1[3] = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate + 270) * 3.1415f / 180.0f), Mathf.Sin((rotate + 270) * 3.1415f / 180.0f)), 1.1f, 256);
+        d1[0] = Physics2D.Raycast(new Vector2(this.transform.position.x+cl.offset.x, this.transform.position.y + cl.offset.y),new Vector2(Mathf.Cos(rotate * 3.1415f / 180.0f), Mathf.Sin(rotate * 3.1415f / 180.0f)), 0.6f,256);
+        d1[1] = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate+90) * 3.1415f / 180.0f), Mathf.Sin((rotate+90) * 3.1415f / 180.0f)), 0.6f, 256);
+        d1[2] = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate + 180) * 3.1415f / 180.0f), Mathf.Sin((rotate + 180) * 3.1415f / 180.0f)), 0.6f, 256);
+        d1[3] = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate + 270) * 3.1415f / 180.0f), Mathf.Sin((rotate + 270) * 3.1415f / 180.0f)), 0.6f, 256);
 
 
-        d2[0] = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos(rotate * 3.1415f / 180.0f), Mathf.Sin(rotate * 3.1415f / 180.0f)), 6.0f, 256);
-        d2[1] = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate + 90) * 3.1415f / 180.0f), Mathf.Sin((rotate + 90) * 3.1415f / 180.0f)), 6.0f, 256);
-        d2[2] = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate + 180) * 3.1415f / 180.0f), Mathf.Sin((rotate + 180) * 3.1415f / 180.0f)), 6.0f, 256);
-        d2[3] = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate + 270) * 3.1415f / 180.0f), Mathf.Sin((rotate + 270) * 3.1415f / 180.0f)), 6.0f, 256);
+        d2[0] = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos(rotate * 3.1415f / 180.0f), Mathf.Sin(rotate * 3.1415f / 180.0f)), 3.0f, 256);
+        d2[1] = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate + 90) * 3.1415f / 180.0f), Mathf.Sin((rotate + 90) * 3.1415f / 180.0f)), 3.0f, 256);
+        d2[2] = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate + 180) * 3.1415f / 180.0f), Mathf.Sin((rotate + 180) * 3.1415f / 180.0f)), 3.0f, 256);
+        d2[3] = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate + 270) * 3.1415f / 180.0f), Mathf.Sin((rotate + 270) * 3.1415f / 180.0f)), 3.0f, 256);
 
         if (yuragitimer < 0.0f)
         {

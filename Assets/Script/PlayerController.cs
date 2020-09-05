@@ -13,13 +13,6 @@ namespace HellGame
         private SpriteRenderer sr = null;
         public GameObject grid = null;
 
-        void Start()
-        {
-            rb = GetComponent<Rigidbody2D>();
-            sr = GetComponent<SpriteRenderer>();
-            rotate = grid.transform.rotation.eulerAngles.z;
-        }
-
         void OnDestroy()
         {
             // PlayerController自体はUnityのライフサイクルに依存するため，
@@ -33,13 +26,30 @@ namespace HellGame
 
         bool babiniku = true; // バ美肉状態かどうかのフラグ
 
+
+        SpriteRenderer s = null;
+        Transform t = null;
         private float rotate;
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            rb = GetComponent<Rigidbody2D>();
+            sr = GetComponent<SpriteRenderer>();
+            rotate = grid.transform.rotation.eulerAngles.z;
+            s = GetComponent<SpriteRenderer>();
+            t = GetComponent<Transform>();
+        }
 
         bool right = false;
 
         // Update is called once per frame
         void Update()
         {
+            s.sortingOrder = 100 - (int)(t.position.y * 10);
+
+
+
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
 
@@ -47,13 +57,13 @@ namespace HellGame
             float vy;
 
 
-            float speed = 17.0f;
+            float speed = 4.0f;
 
             vy = y * Mathf.Cos(rotate * 3.1415f / 180.0f) + x * Mathf.Sin(rotate * 3.1415f / 180.0f);
             vx = -y * Mathf.Sin(rotate * 3.1415f / 180.0f) + x * Mathf.Cos(rotate * 3.1415f / 180.0f);
 
-            // 位置変更はRigidbody2Dに任せるため，モデル側では情報を持たない
             rb.velocity = new Vector2(vx * speed, vy * speed);
+
 
             if (right && vx < -0.1f)
             {
@@ -68,6 +78,7 @@ namespace HellGame
 
         }
 
+
         public void PlayerModelUpdateCoins(PlayerModel sender, int coins)
         {
             // コインの状態変更
@@ -75,7 +86,7 @@ namespace HellGame
 
         public void PlayerModelUpdateBoost(PlayerModel sender, int boost)
         {
-            // ブースト状態の変更
+            // ??
         }
     }
 }
