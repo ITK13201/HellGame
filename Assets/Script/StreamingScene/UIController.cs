@@ -13,6 +13,9 @@ namespace HellGame.StreamingScene
         [SerializeField]
         Text m_statusDisplay;
 
+        // int m_viewportWidth = 777;
+        // int m_viewportHeight = 439;
+
         void Start()
         {
             m_gameController = GetComponent<GameController>();
