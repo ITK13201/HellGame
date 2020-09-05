@@ -21,6 +21,9 @@ namespace HellGame.StreamingScene
         [SerializeField]
         List<SuperChatButton> superChatButtons = new List<SuperChatButton>();
 
+        [SerializeField]
+        GameObject m_imageObject = null;
+
         void Start()
         {
             m_gc = GameController.EnsureGame;
@@ -106,14 +109,17 @@ namespace HellGame.StreamingScene
                 case BiasStateType.Streaming:
                     Debug.Log("配信画面／UIコントローラー：　配信中");
                     ActivateSuperchatButton();
+                    m_imageObject.SetActive(true);
                     break;
                 case BiasStateType.Inactive:
                     seekBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 0);
                     DeactivateSuperchatButton();
+                    m_imageObject.SetActive(false);
                     break;
                 case BiasStateType.Preparing:
                     seekBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 0);
                     DeactivateSuperchatButton();
+                    m_imageObject.SetActive(false);
                     break;
                 default:
                     // unreachable!()
