@@ -65,19 +65,19 @@ public class Enemy : MonoBehaviour
 
 
         find =false;
-        for (int i = -70; i <= 70; i++)
+        for (int i = -16; i <= 16; i++)
         {
-            d3 = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate + maindirection * 90 + yuragi + 2 * i) * 3.1415f / 180.0f), Mathf.Sin((rotate + maindirection * 90 + yuragi + 2 * i) * 3.1415f / 180.0f)), 9.0f, 256 + 512);
+            d3 = Physics2D.Raycast(new Vector2(this.transform.position.x + cl.offset.x, this.transform.position.y + cl.offset.y), new Vector2(Mathf.Cos((rotate + maindirection * 90 + yuragi + 7 * i) * 3.1415f / 180.0f), Mathf.Sin((rotate + maindirection * 90 + yuragi + 7 * i) * 3.1415f / 180.0f)), 9.0f, 256 + 512);
             if (d3.collider)
             {
                 if (d3.collider.gameObject.name == "Player"&&p.babiniku)
                 {
-                    go_ahead = rotate + maindirection * 90 + yuragi + 2 * i;
+                    go_ahead = rotate + maindirection * 90 + yuragi + 7 * i;
                         find = true;
                 }
                 else if(d3.collider.gameObject.name == "GOD")
                 {
-                    go_ahead = rotate + maindirection * 90 + yuragi + 2 * i;
+                    go_ahead = rotate + maindirection * 90 + yuragi + 7 * i;
                     find = true;
                 }
             }

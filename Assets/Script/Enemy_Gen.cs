@@ -41,7 +41,7 @@ public class Enemy_Gen : MonoBehaviour
         }
 
         pos1 = player.transform.position;
-        Generate(30);
+        Generate(20);
 
         NIKU();
 
@@ -56,7 +56,7 @@ public class Enemy_Gen : MonoBehaviour
 
         if (gen_timer > 4.0)
         {
-            Generate(3);
+            Generate(5);
             gen_timer = 0f;
         }
 
