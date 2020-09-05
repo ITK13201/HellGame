@@ -7,7 +7,7 @@ namespace HellGame.Model
     {
         // ステートマシン
         StateMachine<PlayerModel, PlayerState, PlayerStateType> m_stateMachine;
-        StateMachine<PlayerModel, PlayerState, PlayerStateType> StateMachine => m_stateMachine;
+        public StateMachine<PlayerModel, PlayerState, PlayerStateType> StateMachine => m_stateMachine;
 
         // 初期値など
         const int kPlayerModelInitialCoins = 10000;
@@ -16,8 +16,6 @@ namespace HellGame.Model
         // 内部状態
         int m_coins = kPlayerModelInitialCoins;
         int m_boost = kPlayerModelInitialBoost;
-
-        (int, int) m_position = (0, 0);
 
         // アクセサー．ここからビューに通知が送られる
 
@@ -51,19 +49,6 @@ namespace HellGame.Model
             }
         }
 
-        /// <summary>
-        /// 位置．
-        /// </summary>
-        public (int, int) Position
-        {
-            get => m_position;
-            set
-            {
-                m_position = value;
-                Delegate?.PlayerModelUpdatePosition(this, m_position);
-            }
-        }
-
         // デリゲート
         public IPlayerModelDelegate Delegate = null;
 
@@ -72,7 +57,7 @@ namespace HellGame.Model
             // パラメタ類の初期化
             m_stateMachine = new StateMachine<PlayerModel, PlayerState, PlayerStateType>();
             m_stateMachine.Target = this;
-            m_stateMachine.NotifyNextState(new PlayerNormalState());
+            m_stateMachine.NotifyNextState<PlayerNormalState>();
 
             m_coins = kPlayerModelInitialCoins;
             m_boost = kPlayerModelInitialBoost;
@@ -90,7 +75,5 @@ namespace HellGame.Model
         void PlayerModelUpdateCoins(PlayerModel sender, int coins);
 
         void PlayerModelUpdateBoost(PlayerModel sender, int boost);
-
-        void PlayerModelUpdatePosition(PlayerModel sender, (int, int) position);
     }
 }
