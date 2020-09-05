@@ -8,7 +8,7 @@ namespace HellGame.Wishlist
     public class WishlistUIController : MonoBehaviour
     {
         [SerializeField]
-        List<WishlistItem> wishlists;
+        List<WishlistItem> wishlists = new List<WishlistItem> {};
 
         void Start()
         {

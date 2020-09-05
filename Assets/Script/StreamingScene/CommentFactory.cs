@@ -22,7 +22,7 @@ namespace HellGame.StreamingScene
         [SerializeField]
         GameObject chatContainer = null;
 
-        Queue<GameObject> m_comments = new Queue<GameObject> {};
+        Queue<GameObject> m_comments = new Queue<GameObject> { };
 
         const int kMaxComments = 6;
 
