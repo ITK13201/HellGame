@@ -13,10 +13,10 @@ namespace HellGame.State
             where S : State<_Target, _StateType>, new();
     }
 
-    public interface IStateMachineDelegate<_Target, _StateType>
-    {
-        void StateMachineTypeChanged(IStateMachine<_Target, _StateType> sender, _StateType type);
-    }
+    public delegate void StateMachineTransitionDelegate<_Target, _StateType>(
+        IStateMachine<_Target, _StateType> sender,
+        _StateType type
+    );
 
     public class StateMachine<_Target, _State, _StateType>
         : IStateMachine<_Target, _StateType> where
@@ -39,7 +39,9 @@ namespace HellGame.State
         }
 
         public _State State => m_state;
-        public IStateMachineDelegate<_Target, _StateType> Delegate = null;
+
+        public StateMachineTransitionDelegate<_Target, _StateType> StateMachineTransition
+         = delegate { };
 
         public void NotifyNextState<S>(S state)
             where S : State<_Target, _StateType>
@@ -62,7 +64,7 @@ namespace HellGame.State
             m_state = aState;
             state.OnEnter();
 
-            Delegate?.StateMachineTypeChanged(this, m_state.Type);
+            StateMachineTransition(this, m_state.Type);
         }
 
         public void NotifyNextState<S>()

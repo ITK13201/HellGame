@@ -8,6 +8,9 @@ namespace HellGame.StreamingScene
     {
         public UserIconPair userIconPair = new UserIconPair("Kiga Daisuke");
         public string comment = "僕のおうちに来るしん！";
+        public float timestamp = 0;
+        public int price = 0;
+        public bool IsSuperChat => price > 0;
     }
 
     [System.Serializable]

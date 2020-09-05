@@ -12,12 +12,18 @@ namespace HellGame.State
 
         float m_initialWatingTime = 0.0f;
 
+        float m_totalWait = 0.0f;
+
+        public float StreamingDuration => m_biasWaitTime;
+
+        public float RemainingTime => m_biasWaitTime - m_totalWait;
+
         public override void Update()
         {
             var g = GameController.Instance;
-            var totalWait = g.Now - m_initialWatingTime;
+            m_totalWait = g.Now - m_initialWatingTime;
 
-            if (totalWait >= m_biasWaitTime)
+            if (m_totalWait >= m_biasWaitTime)
             {
                 StateMachine.NotifyNextState<BiasInactiveState>();
             }
@@ -28,7 +34,9 @@ namespace HellGame.State
             Debug.Log("推し：配信中　へ変更します");
             
             var g = GameController.Instance;
+
             m_initialWatingTime = g.Now;
+            m_totalWait = 0.0f;
         }
 
         public override void OnExit()
