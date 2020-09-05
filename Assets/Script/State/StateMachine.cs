@@ -8,6 +8,14 @@ namespace HellGame.State
 
         void NotifyNextState<S>(S state)
             where S : State<_Target, _StateType>;
+
+        void NotifyNextState<S>()
+            where S : State<_Target, _StateType>, new();
+    }
+
+    public interface IStateMachineDelegate<_Target, _StateType>
+    {
+        void StateMachineTypeChanged(IStateMachine<_Target, _StateType> sender, _StateType type);
     }
 
     public class StateMachine<_Target, _State, _StateType>
@@ -31,6 +39,7 @@ namespace HellGame.State
         }
 
         public _State State => m_state;
+        public IStateMachineDelegate<_Target, _StateType> Delegate = null;
 
         public void NotifyNextState<S>(S state)
             where S : State<_Target, _StateType>
@@ -41,9 +50,25 @@ namespace HellGame.State
                 return;
             }
 
+            if (m_state != null)
+            {
+
+                m_state.StateMachine = null;
+            }
+
+            aState.StateMachine = this;
+
             m_state?.OnExit();
             m_state = aState;
             state.OnEnter();
+
+            Delegate?.StateMachineTypeChanged(this, m_state.Type);
+        }
+
+        public void NotifyNextState<S>()
+            where S : State<_Target, _StateType>, new()
+        {
+            NotifyNextState(new S());
         }
 
         public void Update()

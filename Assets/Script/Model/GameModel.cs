@@ -16,6 +16,14 @@ namespace HellGame.Model
 
         public GameModel()
         {
+            m_player = new PlayerModel();
+            m_bias = new BiasModel();
+        }
+
+        public void Update()
+        {
+            m_player.Update();
+            m_bias.Update();
         }
     }
 }

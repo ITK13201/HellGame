@@ -7,7 +7,7 @@ namespace HellGame.Model
     {
         // ステートマシン
         StateMachine<PlayerModel, PlayerState, PlayerStateType> m_stateMachine;
-        StateMachine<PlayerModel, PlayerState, PlayerStateType> StateMachine => m_stateMachine;
+        public StateMachine<PlayerModel, PlayerState, PlayerStateType> StateMachine => m_stateMachine;
 
         // 初期値など
         const int kPlayerModelInitialCoins = 10000;
@@ -57,7 +57,7 @@ namespace HellGame.Model
             // パラメタ類の初期化
             m_stateMachine = new StateMachine<PlayerModel, PlayerState, PlayerStateType>();
             m_stateMachine.Target = this;
-            m_stateMachine.NotifyNextState(new PlayerNormalState());
+            m_stateMachine.NotifyNextState<PlayerNormalState>();
 
             m_coins = kPlayerModelInitialCoins;
             m_boost = kPlayerModelInitialBoost;
