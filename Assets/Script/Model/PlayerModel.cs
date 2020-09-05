@@ -17,8 +17,6 @@ namespace HellGame.Model
         int m_coins = kPlayerModelInitialCoins;
         int m_boost = kPlayerModelInitialBoost;
 
-        (int, int) m_position = (0, 0);
-
         // アクセサー．ここからビューに通知が送られる
 
         /// <summary>
@@ -51,19 +49,6 @@ namespace HellGame.Model
             }
         }
 
-        /// <summary>
-        /// 位置．
-        /// </summary>
-        public (int, int) Position
-        {
-            get => m_position;
-            set
-            {
-                m_position = value;
-                Delegate?.PlayerModelUpdatePosition(this, m_position);
-            }
-        }
-
         // デリゲート
         public IPlayerModelDelegate Delegate = null;
 
@@ -90,7 +75,5 @@ namespace HellGame.Model
         void PlayerModelUpdateCoins(PlayerModel sender, int coins);
 
         void PlayerModelUpdateBoost(PlayerModel sender, int boost);
-
-        void PlayerModelUpdatePosition(PlayerModel sender, (int, int) position);
     }
 }

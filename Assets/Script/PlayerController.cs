@@ -18,20 +18,20 @@ namespace HellGame
             rb = GetComponent<Rigidbody2D>();
             sr = GetComponent<SpriteRenderer>();
             rotate = grid.transform.rotation.eulerAngles.z;
-
         }
 
         void OnDestroy()
         {
             // PlayerController自体はUnityのライフサイクルに依存するため，
             // Destroy後はすぐに無効化されてしまうため注意．
-            Player.Delegate = null;
-            Player = null;
+            if (Player != null)
+            {
+                Player.Delegate = null;
+                Player = null;
+            }
         }
 
-
-        bool babiniku = true;//バ美肉状態かどうかのフラグ
-
+        bool babiniku = true; // バ美肉状態かどうかのフラグ
 
         private float rotate;
 
@@ -52,9 +52,8 @@ namespace HellGame
             vy = y * Mathf.Cos(rotate * 3.1415f / 180.0f) + x * Mathf.Sin(rotate * 3.1415f / 180.0f);
             vx = -y * Mathf.Sin(rotate * 3.1415f / 180.0f) + x * Mathf.Cos(rotate * 3.1415f / 180.0f);
 
+            // 位置変更はRigidbody2Dに任せるため，モデル側では情報を持たない
             rb.velocity = new Vector2(vx * speed, vy * speed);
-
-
 
             if (right && vx < -0.1f)
             {
@@ -68,6 +67,7 @@ namespace HellGame
             }
 
         }
+
         public void PlayerModelUpdateCoins(PlayerModel sender, int coins)
         {
             // コインの状態変更
@@ -76,11 +76,6 @@ namespace HellGame
         public void PlayerModelUpdateBoost(PlayerModel sender, int boost)
         {
             // ブースト状態の変更
-        }
-
-        public void PlayerModelUpdatePosition(PlayerModel sender, (int, int) position)
-        {
-            // 位置の変更
         }
     }
 }
