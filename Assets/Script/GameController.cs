@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using HellGame.Model;
 
 namespace HellGame
 {
     public class GameController : MonoBehaviour
     {
+        // 自分のインスタンスはここに持っておく
         static GameController _controller;
 
         /// <summary>
@@ -32,11 +32,27 @@ namespace HellGame
                 return _controller;
             }
         }
+        
+        // ゲームの実体はコレ
+        private GameModel m_model = null;
 
-        // Start is called before the first frame update
-        void Start()
+        /// <summary>
+        /// ゲームの初期化を行う
+        /// </summary>
+        public void InitGame()
         {
+            if (m_model != null) {
+                Debug.LogWarning("");
+                return;
+            }
+        }
 
+        /// <summary>
+        /// ゲームの終了処理を行う
+        /// </summary>
+        public void EndGame()
+        {
+            m_model = null;
         }
 
         // Update is called once per frame

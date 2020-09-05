@@ -10,8 +10,9 @@ namespace HellGame.GameScene
         // Start is called before the first frame update
         void Start()
         {
-            // TODO: ゲームコントローラーを初期化
+            // ゲームを初期化
             var c = GameController.Instance;
+            c.InitGame();
         }
     }
 }
