@@ -89,7 +89,7 @@ namespace HellGame
         {
             if (m_model != null)
             {
-                Debug.LogWarning("fatal: game model already initialized");
+                Debug.LogWarning("ゲームコントローラ：　＜警告＞既にゲームが開始されています．");
                 return;
             }
 

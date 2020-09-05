@@ -27,8 +27,8 @@ namespace HellGame.Model
             get => m_coins;
             set
             {
-                Debug.Assert(value >= 0, "coins should not be negative");
-
+                Debug.Assert(value >= 0, "プレイヤー：モデル　＜エラー＞コイン数は正である必要があります．");
+                Debug.Log($"プレイヤー：モデル　コインを消費します {m_coins} → {value}");
                 m_coins = value;
                 Delegate?.PlayerModelUpdateCoins(this, m_coins);
             }
@@ -42,7 +42,7 @@ namespace HellGame.Model
             get => m_boost;
             set
             {
-                Debug.Assert(value >= 0, "boosts should not be negative");
+                Debug.Assert(value >= 0, "プレイヤー：モデル　＜エラー＞ブーストは正値である必要があります．");
 
                 m_boost = value;
                 Delegate?.PlayerModelUpdateBoost(this, m_boost);
