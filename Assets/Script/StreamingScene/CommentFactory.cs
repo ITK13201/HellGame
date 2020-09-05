@@ -22,19 +22,81 @@ namespace HellGame.StreamingScene
         [SerializeField]
         GameObject chatContainer = null;
 
-        Queue<GameObject> m_comments = new Queue<GameObject> { };
+        List<GameObject> m_comments = new List<GameObject> { };
 
-        const int kMaxComments = 6;
+        const int kMaxComments = 10;
+        const int kChatSectionHeight = 315;
+
+        float m_normalChatYOffset = 0.0f;
 
         void Start()
         {
 
         }
 
+        void RelayoutChat()
+        {
+            // コメントを下から積み上げていく
+            float totalHeight = 0;
+
+            for (int i = m_comments.Count - 1; i >= 0; --i)
+            {
+                var c = m_comments[i];
+                var tr = c.transform as RectTransform;
+                var pos = tr.anchoredPosition;
+
+                totalHeight += tr.sizeDelta.y;
+                pos.y = -kChatSectionHeight + totalHeight;
+                tr.anchoredPosition = pos;
+            }
+
+            if (totalHeight <= kChatSectionHeight)
+            {
+                // 上に詰める
+                for (int i = 0; i < m_comments.Count; ++i)
+                {
+                    var c = m_comments[i];
+                    var tr = c.transform as RectTransform;
+                    var pos = tr.anchoredPosition;
+
+                    pos.y += kChatSectionHeight - totalHeight;
+                    tr.anchoredPosition = pos;
+                }
+            }
+        }
+
         public void EmitComment()
         {
+            AppendCommentView(ConstructNormalComment(NextComment()));
+        }
+
+        public void EmitSuperchat(int budget)
+        {
+            var c = NextComment();
+            c.price = budget;
+            AppendCommentView(ConstructSuperChatComment(c));
+        }
+
+        public void AppendCommentView(GameObject view)
+        {
+            m_comments.Add(view);
+
+            while (m_comments.Count >= kMaxComments)
+            {
+                var g = m_comments[0];
+                m_comments.RemoveAt(0);
+                Destroy(g);
+            }
+
+            // コメントの再配置
+            RelayoutChat();
+        }
+
+        GameObject ConstructNormalComment(Comment data)
+        {
+            Debug.Assert(!data.IsSuperChat, "CommentFactory：　通常コメントである必要があります．");
+
             var view = Instantiate(commentPrefab, chatContainer.transform);
-            var data = NextComment();
 
             var image = view.GetComponentInChildren<Image>();
             var text = view.GetComponentInChildren<Text>();
@@ -42,22 +104,19 @@ namespace HellGame.StreamingScene
             image.sprite = data.userIconPair.icon;
             text.text = $"<color=#666>{data.userIconPair.userName}</color>  {data.comment}";
 
-            // すべてのコメントを下にずらす
-            foreach (var c in m_comments)
-            {
-                var tr = c.transform as RectTransform;
-                var pos = tr.anchoredPosition;
-                pos.y -= (view.transform as RectTransform).sizeDelta.y;
-                tr.anchoredPosition = pos;
-            }
+            return view;
+        }
 
-            m_comments.Enqueue(view);
+        GameObject ConstructSuperChatComment(Comment data)
+        {
+            Debug.Assert(data.IsSuperChat, "CommentFactory：　スーパーチャットである必要があります．");
 
-            while (m_comments.Count >= kMaxComments)
-            {
-                var g = m_comments.Dequeue();
-                Destroy(g);
-            }
+            var view = Instantiate(superChatPrefab, chatContainer.transform);
+            view.SetActive(true);
+
+            // TODO: 
+
+            return view;
         }
 
         Comment NextComment()

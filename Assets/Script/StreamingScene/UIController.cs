@@ -23,7 +23,7 @@ namespace HellGame.StreamingScene
 
         [SerializeField]
         GameObject m_imageObject = null;
-
+    
         void Start()
         {
             m_gc = GameController.EnsureGame;
@@ -87,16 +87,12 @@ namespace HellGame.StreamingScene
                 {
                     continue;
                 }
+                
+                m_factory.EmitSuperchat(b.budget);
 
-                // お金を消費してスパチャを投げる
-                if (m_gc.Model.Player.Coins >= b.budget)
-                {
-                    m_gc.Model.Player.Coins -= b.budget;
-                }
+                return;
             }
 
-            // ボタンのステートを更新
-            ActivateSuperchatButton();
         }
 
         void OnBiasStateChanged(IStateMachine<BiasModel, BiasStateType> sender_, BiasStateType type)
