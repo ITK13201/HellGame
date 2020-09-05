@@ -8,9 +8,6 @@ namespace HellGame.Model
         StateMachine<BiasModel, BiasState, BiasStateType> m_stateMachine;
         public StateMachine<BiasModel, BiasState, BiasStateType> StateMachine => m_stateMachine;
 
-        // デリゲート
-        public IPlayerModelDelegate Delegate = null;
-
         public BiasModel()
         {
             // パラメタ類の初期化

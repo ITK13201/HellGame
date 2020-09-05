@@ -3,6 +3,9 @@ using HellGame.State;
 
 namespace HellGame.Model
 {
+    public delegate void UpdateCoinsEventDelegate(PlayerModel sender, int coins);
+    public delegate void UpdateBoostEventDelegate(PlayerModel sender, int boost);
+
     public class PlayerModel
     {
         // ステートマシン
@@ -10,7 +13,7 @@ namespace HellGame.Model
         public StateMachine<PlayerModel, PlayerState, PlayerStateType> StateMachine => m_stateMachine;
 
         // 初期値など
-        const int kPlayerModelInitialCoins = 10000;
+        const int kPlayerModelInitialCoins = 100000;
         const int kPlayerModelInitialBoost = 0;
 
         // 内部状態
@@ -30,7 +33,7 @@ namespace HellGame.Model
                 Debug.Assert(value >= 0, "プレイヤー：モデル　＜エラー＞コイン数は正である必要があります．");
                 Debug.Log($"プレイヤー：モデル　コインを消費します {m_coins} → {value}");
                 m_coins = value;
-                Delegate?.PlayerModelUpdateCoins(this, m_coins);
+                UpdateCoinsEvent(this, m_coins);
             }
         }
 
@@ -45,12 +48,13 @@ namespace HellGame.Model
                 Debug.Assert(value >= 0, "プレイヤー：モデル　＜エラー＞ブーストは正値である必要があります．");
 
                 m_boost = value;
-                Delegate?.PlayerModelUpdateBoost(this, m_boost);
+                UpdateBoostEvent(this, m_boost);
             }
         }
 
         // デリゲート
-        public IPlayerModelDelegate Delegate = null;
+        public UpdateCoinsEventDelegate UpdateCoinsEvent = delegate {};
+        public UpdateBoostEventDelegate UpdateBoostEvent = delegate {};
 
         public PlayerModel()
         {
