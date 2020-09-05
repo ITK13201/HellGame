@@ -6,7 +6,7 @@ public class layer2 : MonoBehaviour
 {
     SpriteRenderer s = null;
 
-    public int y=0;
+    public float y;
 
     // Start is called before the first frame update
     void Start()
