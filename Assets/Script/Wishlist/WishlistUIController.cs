@@ -8,25 +8,25 @@ namespace HellGame.Wishlist
     public class WishlistUIController : MonoBehaviour
     {
         [SerializeField]
-        List<WishlistItem> wishlists = new List<WishlistItem> {};
+        List<WishlistItem> wishlists = new List<WishlistItem> { };
+
+        GameController m_gc;
 
         void Start()
         {
-            var gc = GameController.EnsureGame;
-            gc.Model.Player.UpdateCoinsEvent += OnCoinsUpdate;
+            m_gc = GameController.EnsureGame;
+            m_gc.Model.Player.UpdateCoinsEvent += OnCoinsUpdate;
 
             ApplyPriceStatus();
         }
 
         void OnDestroy()
         {
-            var gc = GameController.Instance;
-            gc.Model.Player.UpdateCoinsEvent -= OnCoinsUpdate;
+            m_gc.Model.Player.UpdateCoinsEvent -= OnCoinsUpdate;
         }
 
         public void EmitBuy(LeanButton sender)
         {
-            var gc = GameController.Instance;
             // O(n)だけど無視
             foreach (var b in wishlists)
             {
@@ -36,20 +36,18 @@ namespace HellGame.Wishlist
                 }
 
                 // お金を消費してスパチャを投げる
-                if (gc.Model.Player.Coins >= b.price)
+                if (m_gc.Model.Player.Coins >= b.price)
                 {
-                    gc.Model.Player.Coins -= b.price;
+                    m_gc.Model.Player.Coins -= b.price;
                 }
             }
         }
 
         void ApplyPriceStatus()
         {
-            var gc = GameController.Instance;
-
             foreach (var b in wishlists)
             {
-                b.button.interactable = gc.Model.Player.Coins >= b.price;
+                b.button.interactable = m_gc.Model.Player.Coins >= b.price;
             }
         }
 
