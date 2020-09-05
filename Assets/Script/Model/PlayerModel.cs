@@ -31,7 +31,21 @@ namespace HellGame.Model
             set
             {
                 Debug.Assert(value >= 0, "プレイヤー：モデル　＜エラー＞コイン数は正である必要があります．");
-                Debug.Log($"プレイヤー：モデル　コインを消費します {m_coins} → {value}");
+                
+                if (m_coins > value)
+                {
+                    Debug.Log($"プレイヤー：モデル　コインを消費します {m_coins} → {value}");
+                }
+                else if (m_coins < value)
+                {
+                    Debug.Log($"プレイヤー：モデル　コインが追加されました {m_coins} → {value}");
+                }
+                else
+                {
+                    Debug.Log("コインの残高に変化はありません．");
+                    return; 
+                }
+
                 m_coins = value;
                 UpdateCoinsEvent(this, m_coins);
             }
