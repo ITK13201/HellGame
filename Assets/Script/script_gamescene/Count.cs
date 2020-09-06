@@ -15,15 +15,19 @@ public class Count : MonoBehaviour
     public Sprite spritefinish;
     public CanvasGroup cg;
 
+    public GameObject bgm;
+    Music music;
+
     Image image;
     RectTransform r;
 
     // Start is called before the first frame update
     void Start()
     {
+        music = bgm.GetComponent<Music>();
         image = GetComponent<Image>();
         r = GetComponent<RectTransform>();
-
+        music.BGM(3);
         DateTime awakeDateTime = DateTime.Now;
     }
 
@@ -59,6 +63,10 @@ public class Count : MonoBehaviour
         }
         else
         {
+            if (music.num2 ==3)
+            {
+                music.BGM(0);
+            }
             cg.alpha = 0;
 
         }
