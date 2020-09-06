@@ -61,7 +61,7 @@ namespace HellGame
 
         {
 
-            if (!m_gc.Model.Player.StateMachine.State.IsBabiniku&& music.num2 == 2)
+            if (!m_gc.Model.Player.StateMachine.State.IsBabiniku&&music.num2 == 2&&!music.stream)
             {
                 music.BGM(0);
             }

@@ -24,8 +24,20 @@ public class Music : MonoBehaviour
         audioSource.Stop();
         audioSource.PlayOneShot(Sound[num]);
     }
-
-
+    public bool stream = false;
+    public void st1(){
+        num2 = 1; ;
+        audioSource.Stop();
+        audioSource.PlayOneShot(Sound[1]);
+        stream = true;
+    }
+    public void st2()
+    {
+        num2 = 2; ;
+        audioSource.Stop();
+        audioSource.PlayOneShot(Sound[2]);
+        stream = false;
+    }
 
 
 }

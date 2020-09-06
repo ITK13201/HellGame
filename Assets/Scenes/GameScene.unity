@@ -2241,6 +2241,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5612543927863397396, guid: 48ed1b7c866fa476ca30f5849932be16,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1128061655}
+    - target: {fileID: 5612543927863397396, guid: 48ed1b7c866fa476ca30f5849932be16,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: st2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612543927863397396, guid: 48ed1b7c866fa476ca30f5849932be16,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48ed1b7c866fa476ca30f5849932be16, type: 3}
 --- !u!224 &939598565 stripped
@@ -2607,6 +2622,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: dd01591e11408ec408ac766de34b1d0b, type: 3}
   - {fileID: 8300000, guid: 30b6ad8f7377cc9408fbe53bae39e8a1, type: 3}
   num2: 0
+  stream: 0
 --- !u!1 &1129054759
 GameObject:
   m_ObjectHideFlags: 0
@@ -3644,6 +3660,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1585133018}
         m_MethodName: TurnOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1128061655}
+        m_MethodName: st1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
