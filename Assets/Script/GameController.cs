@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using HellGame.Model;
+using System;
 
 namespace HellGame
 {
@@ -36,6 +37,7 @@ namespace HellGame
             }
         }
 
+        [Obsolete("初期化はBootstrap等に任せて，RunOnceAfterInitにゲーム開始後の処理を書いてね")]
         public static GameController EnsureGame
         {
             get
@@ -66,7 +68,11 @@ namespace HellGame
         public GameEndDelegate EndEvent = delegate {};
 
         // とりあえずタイムリミット
-        private readonly float m_timeLimit = 120.0f;
+        public readonly float timeLimit = 120.0f;
+
+        // ええいもうメンドウくせえ！
+        public int SuperChatTotal = 0;
+        public int WishlistTotal = 0;
 
         private void Awake()
         {
@@ -88,7 +94,7 @@ namespace HellGame
 
         private void Start()
         {
-            InitGame();
+            // InitGame();
         }
 
         public void InitGame()
@@ -103,6 +109,8 @@ namespace HellGame
             m_timeBegin = Time.time;
 
             StartEvent();
+
+            Debug.Log("ゲームコントローラ：　ゲームが開始されました");
         }
 
         /// <summary>
@@ -110,8 +118,46 @@ namespace HellGame
         /// </summary>
         public void EndGame()
         {
-            m_model = null;
             EndEvent();
+
+            // やる気を感じない
+            SuperChatTotal = Model.Bias.MoneyFromSuperchat;
+            WishlistTotal = Model.Bias.MoneyFromWishlist;
+            
+            m_model = null;
+            Debug.Log("ゲームコントローラ：　ゲームを終了します");
+        }
+
+        public void RunOnceAfterInit(Action action)
+        {
+            if (Active)
+            {
+                action();
+            }
+
+            void action_()
+            {
+                action();
+                StartEvent -= action_;
+            }
+
+            StartEvent += action_;
+        }
+
+        public void Cleanup(Action action)
+        {
+            if (Active)
+            {
+                action();
+            }
+
+            void action_()
+            {
+                action();
+                EndEvent -= action_;
+            }
+
+            EndEvent += action_;
         }
 
         void Update()
@@ -123,7 +169,7 @@ namespace HellGame
             
             m_model.Update();
 
-            if (Now >= m_timeLimit)
+            if (Now >= timeLimit)
             {
                 EndGame();
             }

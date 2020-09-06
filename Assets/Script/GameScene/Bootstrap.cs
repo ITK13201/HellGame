@@ -12,7 +12,7 @@ namespace HellGame.GameScene
         {
             // ゲームを初期化
             var c = GameController.Instance;
-            c.InitGame();
+            // c.InitGame();
         }
     }
 }

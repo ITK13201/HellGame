@@ -29,25 +29,48 @@ namespace HellGame.StreamingScene
     
         void Start()
         {
-            m_gc = GameController.EnsureGame;
+            // ダメっぽい
+        }
+
+        void OnEnable()
+        {
+            Debug.Log("配信画面／UIコントローラー：　ハンドラの有効化");
+
+            m_gc = GameController.Instance;
             m_factory = GetComponent<CommentFactory>();
 
-            var m = m_gc.Model.Bias.StateMachine;
+            m_gc.RunOnceAfterInit(() => {
+                var m = m_gc.Model.Bias.StateMachine;
+                m.StateMachineTransition += OnBiasStateChanged;
 
-            m.StateMachineTransition += OnBiasStateChanged;
+                // 初期化
+                OnBiasStateChanged(m, m.State.Type);
+            });
+        }
 
-            // 初期化
-            OnBiasStateChanged(m, m.State.Type);
+        void OnDisable()
+        {
+            Debug.Log("配信画面／UIコントローラー：　ハンドラの無効化");
+
+            var m = m_gc.Model?.Bias?.StateMachine;
+            if (m != null)
+            {
+                m.StateMachineTransition -= OnBiasStateChanged;
+            }
         }
 
         void OnDestroy()
         {
-            m_gc.Model.Bias.StateMachine.StateMachineTransition -= OnBiasStateChanged;
             m_gc = null;
         }
 
         void Update()
         {
+            if (!m_gc.Active)
+            {
+                return;
+            }
+
             DisplayStatus();
 
             // ダミーのコメントを生成
@@ -102,6 +125,8 @@ namespace HellGame.StreamingScene
                     m_gc.Model.Player.Coins -= b.budget;
                     m_factory.EmitSuperchat(b.budget);
                 }
+
+                ActivateSuperchatButton();
 
                 return;
             }

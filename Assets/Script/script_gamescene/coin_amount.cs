@@ -11,13 +11,18 @@ public class coin_amount : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         var gc = GameController.Instance;
+        if (!gc.Active)
+        {
+            return;
+        }
+
         text.text = gc.Model.Player.Coins.ToString("D7");
     }
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace HellGame
 {
-
     public class PlayerController : MonoBehaviour
     {
         private Rigidbody2D rb = null;
@@ -15,7 +14,18 @@ namespace HellGame
         public GameObject bgm;
         Music music;
 
-        public bool babiniku => m_gc.Model.Player.StateMachine.State.IsBabiniku;
+        private bool m_babinikuCache = false;
+        public bool babiniku {
+            get {
+                if (!m_gc.Active)
+                {
+                    // やっぱり状態は維持すべき？
+                    return m_babinikuCache;
+                }
+
+                return m_babinikuCache = m_gc.Model.Player.StateMachine.State.IsBabiniku;
+            }
+        }
 
         public GameObject o = null;
         public GameObject coin;
@@ -46,7 +56,7 @@ namespace HellGame
             //music.BGM(0);
 
             // ゲームコントローラと接続
-            m_gc = GameController.EnsureGame;
+            m_gc = GameController.Instance;
         }
 
         void OnDestroy()
@@ -65,7 +75,6 @@ namespace HellGame
             {
                 music.BGM(0);
             }
-
 
             s.sortingOrder = 100 - (int)(t.position.y * 10);
 
@@ -110,7 +119,10 @@ namespace HellGame
         //トリガーはVRゴーグルだけなのでこれでうごく
         void OnTriggerEnter2D(Collider2D collision)
         {
-            // babiniku = true;//バ美肉になる
+            if (!m_gc.Active)
+            {
+                return;
+            }
 
             collision.transform.position = new Vector2(30, 30);//ゴーグルにいったん退場してもらう
 
@@ -120,6 +132,11 @@ namespace HellGame
 
         void OnCollisionEnter2D(Collision2D collision)
         {
+            if (!m_gc.Active)
+            {
+                return;
+            }
+
             if (collision.collider.tag == "enemy" && babiniku)
             {
                 Destroy(collision.collider.gameObject);

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
+using HellGame;
 
 public class Count2 : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class Count2 : MonoBehaviour
         r = GetComponent<RectTransform>();
 
         DateTime awakeDateTime = DateTime.Now;
+
+        var gc = GameController.Instance;
+        gc.Cleanup(FINISH);
     }
 
 

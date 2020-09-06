@@ -53,6 +53,11 @@ namespace HellGame
         // Update is called once per frame
         void Update()
         {
+            if (!GameController.Instance.Active)
+            {
+                return;
+            }
+
             float go_ahead;
 
             RaycastHit2D[] d1 = new RaycastHit2D[4];
