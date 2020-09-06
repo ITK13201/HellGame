@@ -20,7 +20,7 @@ public class Twitter : MonoBehaviour
     }
 
 
-    void New_Message(string name ,string mes)
+    public void New_Message(string name ,string mes)
     {
         for (int q = 0; q < 3; q++)
         {
