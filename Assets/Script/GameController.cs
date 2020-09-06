@@ -70,6 +70,10 @@ namespace HellGame
         // とりあえずタイムリミット
         public readonly float timeLimit = 120.0f;
 
+        // ええいもうメンドウくせえ！
+        public int SuperChatTotal = 0;
+        public int WishlistTotal = 0;
+
         private void Awake()
         {
             if (_controller == null)
@@ -90,7 +94,7 @@ namespace HellGame
 
         private void Start()
         {
-            InitGame();
+            // InitGame();
         }
 
         public void InitGame()
@@ -115,6 +119,10 @@ namespace HellGame
         public void EndGame()
         {
             EndEvent();
+
+            // やる気を感じない
+            SuperChatTotal = Model.Bias.MoneyFromSuperchat;
+            WishlistTotal = Model.Bias.MoneyFromWishlist;
             
             m_model = null;
             Debug.Log("ゲームコントローラ：　ゲームを終了します");

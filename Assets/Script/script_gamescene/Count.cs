@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using HellGame;
 
 public class Count : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class Count : MonoBehaviour
 
     Image image;
     RectTransform r;
+
+    bool once = true;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +63,11 @@ public class Count : MonoBehaviour
         else
         {
             cg.alpha = 0;
-
+            if (once)
+            {
+                GameController.Instance.InitGame();
+                once = false;
+            }
         }
 
 
