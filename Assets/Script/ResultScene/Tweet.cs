@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Runtime.InteropServices;
 
 public class Tweet : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class Tweet : MonoBehaviour
     public string text = "HellGame";
     public string linkurl = "test.com";
     public string hashtags = "HellGame";
+
+#if UNITY_WEBGL
+    [DllImport("__Internal")]
+    private static extern void OpenToBlankWindow(string _url);
+#endif
 
     // open tweet window
     private void Tweeting()
@@ -24,7 +30,7 @@ public class Tweet : MonoBehaviour
 #if UNITY_EDITOR
         Application.OpenURL(url);
 #elif UNITY_WEBGL
-        Application.ExternalEval(string.Format("window.open('{0}','_blank')", url));
+        OpenToBlankWindow(url);
 #else
         Application.OpenURL(url);
 #endif
