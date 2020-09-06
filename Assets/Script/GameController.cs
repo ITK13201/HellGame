@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using HellGame.Model;
+using System;
 
 namespace HellGame
 {
@@ -36,6 +37,7 @@ namespace HellGame
             }
         }
 
+        [Obsolete("初期化はBootstrap等に任せて，RunOnceAfterInitにゲーム開始後の処理を書いてね")]
         public static GameController EnsureGame
         {
             get
@@ -66,7 +68,7 @@ namespace HellGame
         public GameEndDelegate EndEvent = delegate {};
 
         // とりあえずタイムリミット
-        private readonly float m_timeLimit = 120.0f;
+        private readonly float m_timeLimit = 5.0f;
 
         private void Awake()
         {
@@ -110,8 +112,41 @@ namespace HellGame
         /// </summary>
         public void EndGame()
         {
-            m_model = null;
             EndEvent();
+            
+            m_model = null;
+        }
+
+        public void RunOnceAfterInit(Action action)
+        {
+            if (Active)
+            {
+                action();
+            }
+
+            void action_()
+            {
+                action();
+                StartEvent -= action_;
+            }
+
+            StartEvent += action_;
+        }
+
+        public void Cleanup(Action action)
+        {
+            if (Active)
+            {
+                action();
+            }
+
+            void action_()
+            {
+                action();
+                EndEvent -= action_;
+            }
+
+            EndEvent += action_;
         }
 
         void Update()

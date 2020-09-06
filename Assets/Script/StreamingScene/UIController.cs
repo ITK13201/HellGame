@@ -29,25 +29,35 @@ namespace HellGame.StreamingScene
     
         void Start()
         {
-            m_gc = GameController.EnsureGame;
+            m_gc = GameController.Instance;
             m_factory = GetComponent<CommentFactory>();
 
             var m = m_gc.Model.Bias.StateMachine;
 
-            m.StateMachineTransition += OnBiasStateChanged;
+            m_gc.RunOnceAfterInit(() => {
+                m.StateMachineTransition += OnBiasStateChanged;
 
-            // 初期化
-            OnBiasStateChanged(m, m.State.Type);
+                // 初期化
+                OnBiasStateChanged(m, m.State.Type);
+            });
+
+            m_gc.Cleanup(() => {
+                m.StateMachineTransition -= OnBiasStateChanged;
+            });
         }
 
         void OnDestroy()
         {
-            m_gc.Model.Bias.StateMachine.StateMachineTransition -= OnBiasStateChanged;
             m_gc = null;
         }
 
         void Update()
         {
+            if (!m_gc.Active)
+            {
+                return;
+            }
+
             DisplayStatus();
 
             // ダミーのコメントを生成

@@ -23,8 +23,10 @@ public class Twitter : MonoBehaviour
             sc[q] = window[q].GetComponent<Twitter2>();
         }
 
-        m_gc = GameController.EnsureGame;
-        m_gc.Model.Bias.StateMachine.StateMachineTransition += OnBiasStateChanged;
+        m_gc = GameController.Instance;
+        m_gc.RunOnceAfterInit(() => {
+            m_gc.Model.Bias.StateMachine.StateMachineTransition += OnBiasStateChanged;
+        });
     }
 
     void OnDestroy()

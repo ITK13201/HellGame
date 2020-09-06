@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace HellGame
 {
-
     public class PlayerController : MonoBehaviour
     {
         private Rigidbody2D rb = null;
@@ -13,7 +12,18 @@ namespace HellGame
         public Sprite sp2;//普通の画像
 
 
-        public bool babiniku => m_gc.Model.Player.StateMachine.State.IsBabiniku;
+        private bool m_babinikuCache = false;
+        public bool babiniku {
+            get {
+                if (!m_gc.Active)
+                {
+                    // やっぱり状態は維持すべき？
+                    return m_babinikuCache;
+                }
+
+                return m_babinikuCache = m_gc.Model.Player.StateMachine.State.IsBabiniku;
+            }
+        }
 
         public GameObject o = null;
         public GameObject coin;
@@ -41,7 +51,7 @@ namespace HellGame
             coin = (GameObject)Resources.Load("coin");
 
             // ゲームコントローラと接続
-            m_gc = GameController.EnsureGame;
+            m_gc = GameController.Instance;
         }
 
         void OnDestroy()
@@ -54,6 +64,11 @@ namespace HellGame
         // Update is called once per frame
         void Update()
         {
+            if (!m_gc.Active)
+            {
+                return;
+            }
+
             s.sortingOrder = 100 - (int)(t.position.y * 10);
 
             if (babiniku)
@@ -89,26 +104,16 @@ namespace HellGame
                 s.flipX = true;
                 right = true;
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
 
 
         //トリガーはVRゴーグルだけなのでこれでうごく
         void OnTriggerEnter2D(Collider2D collision)
         {
-            // babiniku = true;//バ美肉になる
+            if (!m_gc.Active)
+            {
+                return;
+            }
 
             collision.transform.position = new Vector2(30, 30);//ゴーグルにいったん退場してもらう
 
@@ -117,6 +122,11 @@ namespace HellGame
 
         void OnCollisionEnter2D(Collision2D collision)
         {
+            if (!m_gc.Active)
+            {
+                return;
+            }
+
             if (collision.collider.tag == "enemy" && babiniku)
             {
                 Destroy(collision.collider.gameObject);

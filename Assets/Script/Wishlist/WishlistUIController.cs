@@ -14,15 +14,20 @@ namespace HellGame.Wishlist
 
         void Start()
         {
-            m_gc = GameController.EnsureGame;
-            m_gc.Model.Player.UpdateCoinsEvent += OnCoinsUpdate;
+            m_gc = GameController.Instance;
 
-            ApplyPriceStatus();
+            m_gc.RunOnceAfterInit(() => {
+                m_gc.Model.Player.UpdateCoinsEvent += OnCoinsUpdate;
+                ApplyPriceStatus();
+            });
+            m_gc.Cleanup(() => {
+                m_gc.Model.Player.UpdateCoinsEvent -= OnCoinsUpdate;
+            });
         }
 
         void OnDestroy()
         {
-            m_gc.Model.Player.UpdateCoinsEvent -= OnCoinsUpdate;
+            //
         }
 
         public void EmitBuy(LeanButton sender)
