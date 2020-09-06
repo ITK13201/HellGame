@@ -17,9 +17,9 @@ public class Tweet : MonoBehaviour
         var gc = GameController.Instance;
 
         var url = "https://twitter.com/intent/tweet?"
-            + "text=" + text + $" ¥{(gc.WishlistTotal + gc.SuperChatTotal):#,0} ご支援ありがとうにゃ！\n"
+            + "text=" + text + $" ￥{(gc.WishlistTotal + gc.SuperChatTotal):#,0} ご支援ありがとうにゃ！\n"
             + "&url=" + linkurl+"\n"
-            + "&hashtags=" + hashtags;
+            + "&hashtags=" + $"{hashtags}, みすゲームジャム2020";
 
 #if UNITY_EDITOR
         Application.OpenURL(url);
