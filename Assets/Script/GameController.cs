@@ -3,6 +3,9 @@ using HellGame.Model;
 
 namespace HellGame
 {
+    public delegate void GameStartDelegate();
+    public delegate void GameEndDelegate();
+
     public class GameController : MonoBehaviour
     {
         // 自分のインスタンスはここに持っておく
@@ -59,6 +62,12 @@ namespace HellGame
 
         public bool Active => m_model != null;
 
+        public GameStartDelegate StartEvent = delegate {};
+        public GameEndDelegate EndEvent = delegate {};
+
+        // とりあえずタイムリミット
+        private readonly float m_timeLimit = 120.0f;
+
         private void Awake()
         {
             if (_controller == null)
@@ -80,12 +89,9 @@ namespace HellGame
         private void Start()
         {
             InitGame();
-
         }
 
         public void InitGame()
-
-
         {
             if (m_model != null)
             {
@@ -95,6 +101,8 @@ namespace HellGame
 
             m_model = new GameModel();
             m_timeBegin = Time.time;
+
+            StartEvent();
         }
 
         /// <summary>
@@ -103,11 +111,22 @@ namespace HellGame
         public void EndGame()
         {
             m_model = null;
+            EndEvent();
         }
 
         void Update()
         {
+            if (!Active)
+            {
+                return;
+            }
+            
             m_model.Update();
+
+            if (Now >= m_timeLimit)
+            {
+                EndGame();
+            }
         }
     }
 }
