@@ -813,7 +813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TweetButton: {fileID: 1630981753}
   text: HellGame
-  linkurl: test.com
+  linkurl: https://projects.misw.jp/2020/HellGame/
   hashtags: HellGame
 --- !u!114 &1630981753
 MonoBehaviour:
