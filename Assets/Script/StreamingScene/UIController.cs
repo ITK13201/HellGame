@@ -126,6 +126,8 @@ namespace HellGame.StreamingScene
                     m_factory.EmitSuperchat(b.budget);
                 }
 
+                ActivateSuperchatButton();
+
                 return;
             }
 

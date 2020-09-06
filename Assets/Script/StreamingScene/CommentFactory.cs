@@ -128,7 +128,18 @@ namespace HellGame.StreamingScene
 
             if (data.price == 1000)
             {
-                // FUCK
+                c.darkSection.color = new Color(255 / 255.0f, 179 / 255.0f, 0 / 255.0f);
+                c.brightSection.color = new Color(255 / 255.0f, 202 / 255.0f, 40 / 255.0f);
+                
+            }
+            else if (data.price == 10000)
+            {
+                c.darkSection.color = new Color(208 / 255.0f, 0, 0);
+                c.brightSection.color = new Color(230 / 255.0f, 33 / 255.0f, 23 / 255.0f);
+
+                c.price.color = Color.white;
+                c.message.color = Color.white;
+                c.userName.color = Color.white;
             }
 
             return view;
