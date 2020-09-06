@@ -1,23 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class layer2 : MonoBehaviour
+public class coin_amount : MonoBehaviour
 {
-    SpriteRenderer s = null;
-
-    public float y;
+    public Text text;
+    public int money=0;
 
     // Start is called before the first frame update
     void Start()
     {
-        s = GetComponent<SpriteRenderer>();
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        s.sortingOrder = 100 - (int)(y * 10);
+        text.text = money.ToString("0000000");
+
     }
 }
