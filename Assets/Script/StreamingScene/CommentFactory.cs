@@ -27,11 +27,9 @@ namespace HellGame.StreamingScene
         const int kMaxComments = 10;
         const int kChatSectionHeight = 315;
 
-        float m_normalChatYOffset = 0.0f;
-
         void Start()
         {
-
+            //
         }
 
         void RelayoutChat()
@@ -90,6 +88,16 @@ namespace HellGame.StreamingScene
 
             // コメントの再配置
             RelayoutChat();
+        }
+
+        public void ClearComment()
+        {
+            foreach (var c in m_comments)
+            {
+                Destroy(c);
+            }
+            
+            m_comments.Clear();
         }
 
         GameObject ConstructNormalComment(Comment data)

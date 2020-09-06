@@ -23,19 +23,21 @@ namespace HellGame.StreamingScene
 
         [SerializeField]
         GameObject m_imageObject = null;
+
+        const float kCommentSpawnRate = 17;
+        bool m_commentActive = false;
     
         void Start()
         {
             m_gc = GameController.EnsureGame;
+            m_factory = GetComponent<CommentFactory>();
+
             var m = m_gc.Model.Bias.StateMachine;
 
             m.StateMachineTransition += OnBiasStateChanged;
 
             // 初期化
             OnBiasStateChanged(m, m.State.Type);
-
-            //
-            m_factory = GetComponent<CommentFactory>();
         }
 
         void OnDestroy()
@@ -47,6 +49,12 @@ namespace HellGame.StreamingScene
         void Update()
         {
             DisplayStatus();
+
+            // ダミーのコメントを生成
+            if (m_commentActive && UnityEngine.Random.Range(0, 1000) <= kCommentSpawnRate)
+            {
+                m_factory.EmitComment();
+            }
         }
 
         void DisplayStatus()
@@ -109,16 +117,20 @@ namespace HellGame.StreamingScene
             {
                 case BiasStateType.Streaming:
                     Debug.Log("配信画面／UIコントローラー：　配信中");
+                    m_commentActive = true;
                     ActivateSuperchatButton();
                     m_imageObject.SetActive(true);
                     break;
                 case BiasStateType.Inactive:
                     seekBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 0);
+                    m_commentActive = false;
                     DeactivateSuperchatButton();
+                    m_factory.ClearComment();
                     m_imageObject.SetActive(false);
                     break;
                 case BiasStateType.Preparing:
                     seekBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 0);
+                    m_commentActive = false;
                     DeactivateSuperchatButton();
                     m_imageObject.SetActive(false);
                     break;
