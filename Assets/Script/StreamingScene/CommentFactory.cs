@@ -122,7 +122,14 @@ namespace HellGame.StreamingScene
             var view = Instantiate(superChatPrefab, chatContainer.transform);
             view.SetActive(true);
 
-            // TODO: 
+            var c = view.GetComponent<SuperChatController>();
+
+            c.price.text = $"¥{data.price:#,0}";
+
+            if (data.price == 1000)
+            {
+                // FUCK
+            }
 
             return view;
         }
