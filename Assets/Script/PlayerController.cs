@@ -11,6 +11,8 @@ namespace HellGame
         public Sprite sp1;//バ美肉の画像
         public Sprite sp2;//普通の画像
 
+        public GameObject bgm;
+        Music music;
 
         private bool m_babinikuCache = false;
         public bool babiniku {
@@ -41,6 +43,7 @@ namespace HellGame
         // Start is called before the first frame update
         void Start()
         {
+            music = bgm.GetComponent<Music>();
             rb = GetComponent<Rigidbody2D>();
             rotate = grid.transform.rotation.eulerAngles.z;
             s = GetComponent<SpriteRenderer>();
@@ -49,6 +52,8 @@ namespace HellGame
             e = o.GetComponent<Enemy_Gen>();
 
             coin = (GameObject)Resources.Load("coin");
+
+            //music.BGM(0);
 
             // ゲームコントローラと接続
             m_gc = GameController.Instance;
@@ -63,10 +68,12 @@ namespace HellGame
 
         // Update is called once per frame
         void Update()
+
         {
-            if (!m_gc.Active)
+
+            if (!m_gc.Model.Player.StateMachine.State.IsBabiniku&&music.num2 == 2&&!music.stream)
             {
-                return;
+                music.BGM(0);
             }
 
             s.sortingOrder = 100 - (int)(t.position.y * 10);
@@ -104,6 +111,8 @@ namespace HellGame
                 s.flipX = true;
                 right = true;
             }
+
+
         }
 
 
@@ -118,6 +127,7 @@ namespace HellGame
             collision.transform.position = new Vector2(30, 30);//ゴーグルにいったん退場してもらう
 
             m_gc.Model.Player.StateMachine.State.OnBabinikuTriggered();
+            music.BGM(2);
         }
 
         void OnCollisionEnter2D(Collision2D collision)
