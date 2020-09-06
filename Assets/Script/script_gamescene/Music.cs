@@ -6,25 +6,27 @@ public class Music : MonoBehaviour
 {
     public AudioClip[] Sound=new AudioClip[6];
     private AudioSource audioSource;
+    public bool stream = false;
 
-    public int num2;
+    public int num2=0;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource = this.gameObject.GetComponent<AudioSource>();
+        audioSource.PlayOneShot(Sound[0]);
+        audioSource.Stop();
 
     }
 
     // Update is called once per frame
-    
+
     public void BGM(int num)
     {
         num2 = num; ;
         audioSource.Stop();
         audioSource.PlayOneShot(Sound[num]);
     }
-    public bool stream = false;
     public void st1(){
         num2 = 1; ;
         audioSource.Stop();

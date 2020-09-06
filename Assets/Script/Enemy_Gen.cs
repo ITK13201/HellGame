@@ -44,7 +44,10 @@ public class Enemy_Gen : MonoBehaviour
         Generate(20);
 
         NIKU();
-
+        Invoke("NIKU", Random.Range(25.0f, 35.0f));
+        Invoke("NIKU", Random.Range(55.0f, 65.0f));
+        Invoke("NIKU", Random.Range(85.0f, 95.0f));
+        Invoke("NIKU", Random.Range(115.0f, 125.0f));
 
     }
 

@@ -1709,7 +1709,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 0000000
 --- !u!222 &640108372
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2621,8 +2621,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 37268e40aa0e8f549bd7ffc2908761d8, type: 3}
   - {fileID: 8300000, guid: dd01591e11408ec408ac766de34b1d0b, type: 3}
   - {fileID: 8300000, guid: 30b6ad8f7377cc9408fbe53bae39e8a1, type: 3}
-  num2: 0
   stream: 0
+  num2: 0
 --- !u!1 &1129054759
 GameObject:
   m_ObjectHideFlags: 0
@@ -5920,7 +5920,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841419539}
   m_Enabled: 1
-  m_Alpha: 0.97
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -6531,7 +6531,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057134862}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -6839,7 +6839,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2129336968}
   m_Enabled: 1
-  m_Alpha: 0.97
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
