@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using HellGame;
 
 public class coin_amount : MonoBehaviour
 {
     public Text text;
-    public int money=0;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class coin_amount : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = money.ToString("0000000");
-
+        var gc = GameController.Instance;
+        text.text = gc.Model.Player.Coins.ToString("D7");
     }
 }
