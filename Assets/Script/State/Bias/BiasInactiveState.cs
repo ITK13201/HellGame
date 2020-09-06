@@ -25,15 +25,28 @@ namespace HellGame.State
 
         public override void OnEnter()
         {
-            Debug.Log("推し：待ち　へ変更します");
+            // m_biasWaitTimeを課金額から算出
+            m_biasWaitTime = CalcBiasWaitTime();
+            Debug.Log($"推し：待ち　へ変更します．予定待ち時間は，{m_biasWaitTime} 秒です");
 
             var g = GameController.Instance;
             m_initialWatingTime = g.Now;
+
+            Target.MoneyFromWishlistEvent += UpdateWaitTime;
         }
 
         public override void OnExit()
         {
+            Target.MoneyFromWishlistEvent -= UpdateWaitTime;
             Debug.Log("推し：待ち　から抜けます");
         }
+
+        void UpdateWaitTime(BiasModel sender, int _delta)
+        {
+            m_biasWaitTime = CalcBiasWaitTime();
+            Debug.Log($"推し：待ち　予定待ち時間が{m_biasWaitTime} 秒に更新されました");
+        }
+
+        float CalcBiasWaitTime() => 20.0f / Mathf.Log(2.0f + Target.MoneyFromWishlist * 6.0e-6f);
     }
 }

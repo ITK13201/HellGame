@@ -54,13 +54,12 @@ namespace HellGame.State
 
             if (m_state != null)
             {
-
+                m_state.OnExit();
                 m_state.StateMachine = null;
             }
 
             aState.StateMachine = this;
 
-            m_state?.OnExit();
             m_state = aState;
             state.OnEnter();
 
