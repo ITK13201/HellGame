@@ -68,7 +68,7 @@ namespace HellGame
         public GameEndDelegate EndEvent = delegate {};
 
         // とりあえずタイムリミット
-        private readonly float m_timeLimit = 5.0f;
+        public readonly float timeLimit = 120.0f;
 
         private void Awake()
         {
@@ -105,6 +105,8 @@ namespace HellGame
             m_timeBegin = Time.time;
 
             StartEvent();
+
+            Debug.Log("ゲームコントローラ：　ゲームが開始されました");
         }
 
         /// <summary>
@@ -115,6 +117,7 @@ namespace HellGame
             EndEvent();
             
             m_model = null;
+            Debug.Log("ゲームコントローラ：　ゲームを終了します");
         }
 
         public void RunOnceAfterInit(Action action)
@@ -158,7 +161,7 @@ namespace HellGame
             
             m_model.Update();
 
-            if (Now >= m_timeLimit)
+            if (Now >= timeLimit)
             {
                 EndGame();
             }
