@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using HellGame;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,9 +14,11 @@ public class Tweet : MonoBehaviour
     // open tweet window
     private void Tweeting()
     {
+        var gc = GameController.Instance;
+
         var url = "https://twitter.com/intent/tweet?"
-            + "text=" + text
-            + "&url=" + linkurl
+            + "text=" + text + $" ￥{(gc.WishlistTotal + gc.SuperChatTotal):#,0} ご支援ありがとうにゃ！\n"
+            + "&url=" + linkurl+"\n"
             + "&hashtags=" + hashtags;
 
 #if UNITY_EDITOR
