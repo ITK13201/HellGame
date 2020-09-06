@@ -9,7 +9,7 @@ namespace HellGame.State
 
         public override void Update()
         {
-            // TODO: バ美肉可能か判定する
+            // 何もしない
         }
 
         public override void OnEnter()
@@ -22,9 +22,10 @@ namespace HellGame.State
             Debug.Log("プレイヤー：通常状態 から抜けます");;
         }
 
-        public override void OnCollide(object target)
+        public override void OnBabinikuTriggered()
         {
-            Debug.Log($"プレイヤー：通常状態　物体と衝突しました");
+            Debug.Log("プレイヤー：通常状態 バ美肉をトリガー");
+            StateMachine.NotifyNextState<PlayerBabinikuState>();
         }
     }
 }

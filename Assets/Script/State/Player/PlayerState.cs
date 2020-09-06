@@ -24,6 +24,10 @@ namespace HellGame.State
         }
 
         public virtual void OnLeaveTriggered() { }
+
+        public virtual void OnBabinikuTriggered() {}
+
+        public virtual bool IsBabiniku => false;
     }
 
     public enum PlayerStateType

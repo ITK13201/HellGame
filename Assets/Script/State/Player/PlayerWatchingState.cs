@@ -9,6 +9,8 @@ namespace HellGame.State
         public override PlayerStateType Type => PlayerStateType.Watching;
         private PlayerState _previousState = null;
 
+        public override bool IsBabiniku => _previousState.IsBabiniku;
+
         public PlayerWatchingState(PlayerState previous)
         {
             _previousState = previous;
