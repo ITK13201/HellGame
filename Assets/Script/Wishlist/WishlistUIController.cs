@@ -35,9 +35,10 @@ namespace HellGame.Wishlist
                     continue;
                 }
 
-                // お金を消費してスパチャを投げる
+                // お金を消費して欲しいものリストからのお金として登録
                 if (m_gc.Model.Player.Coins >= b.price)
                 {
+                    m_gc.Model.Bias.MoneyFromWishlist += b.price;
                     m_gc.Model.Player.Coins -= b.price;
                 }
             }

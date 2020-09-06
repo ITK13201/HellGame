@@ -88,7 +88,12 @@ namespace HellGame.StreamingScene
                     continue;
                 }
                 
-                m_factory.EmitSuperchat(b.budget);
+                if (m_gc.Model.Player.Coins >= b.budget)
+                {
+                    m_gc.Model.Bias.MoneyFromSuperchat += b.budget;
+                    m_gc.Model.Player.Coins -= b.budget;
+                    m_factory.EmitSuperchat(b.budget);
+                }
 
                 return;
             }
