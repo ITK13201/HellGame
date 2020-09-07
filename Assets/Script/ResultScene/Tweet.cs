@@ -25,7 +25,7 @@ public class Tweet : MonoBehaviour
         var url = "https://twitter.com/intent/tweet?"
             + "text=" + text + $" ￥{(gc.WishlistTotal + gc.SuperChatTotal):#,0} ご支援ありがとうにゃ！\n"
             + "&url=" + linkurl+"\n"
-            + "&hashtags=" + $"{hashtags}, みすゲームジャム2020";
+            + "&hashtags=" + $"{hashtags},みすゲームジャム2020";
 
 #if UNITY_EDITOR
         Application.OpenURL(url);
