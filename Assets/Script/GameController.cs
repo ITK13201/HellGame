@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using HellGame.Model;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace HellGame
 {
@@ -158,6 +159,12 @@ namespace HellGame
             }
 
             EndEvent += action_;
+        }
+
+        // 設計も命名もわからん
+        public void DestroyOnLoad()
+        {
+            SceneManager.MoveGameObjectToScene(this.gameObject, SceneManager.GetActiveScene());
         }
 
         void Update()

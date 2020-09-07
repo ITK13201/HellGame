@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using HellGame;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,6 +21,7 @@ public class BackToTitle : MonoBehaviour
     // Load TitleScene
     public void LoadTitleScene()
     {
+        GameController.Instance.DestroyOnLoad();
         SceneManager.LoadScene("TitleScene");
     }
 }
