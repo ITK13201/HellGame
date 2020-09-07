@@ -106,8 +106,8 @@ namespace HellGame
                 return;
             }
 
-            m_model = new GameModel();
             m_timeBegin = Time.time;
+            m_model = new GameModel();
 
             StartEvent();
 
